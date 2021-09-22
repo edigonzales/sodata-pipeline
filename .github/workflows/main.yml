@@ -18,13 +18,13 @@ jobs:
           echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
           docker build -t $DOCKER_ACCOUNT/$DOCKER_REPO:latest -f Dockerfile .
           docker tag $DOCKER_ACCOUNT/$DOCKER_REPO:latest $DOCKER_ACCOUNT/$DOCKER_REPO:0.0.$BUILD_NUMBER
-      # - name: Push Docker Images
-      #   if: ${{ github.ref == 'refs/heads/main' }}
-      #   run: |
-      #     echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-      #     docker images
-      #     docker push $DOCKER_ACCOUNT/$DOCKER_REPO:latest
-      #     docker push $DOCKER_ACCOUNT/$DOCKER_REPO:0.0.$BUILD_NUMBER
+      - name: Push Docker Images
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+          docker images
+          docker push $DOCKER_ACCOUNT/$DOCKER_REPO:latest
+          docker push $DOCKER_ACCOUNT/$DOCKER_REPO:0.0.$BUILD_NUMBER
       # - name: Deploy to Digital Ocean App Platform
       #   if: ${{ github.ref == 'refs/heads/main' }}
       #   run: |
