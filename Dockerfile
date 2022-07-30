@@ -1,4 +1,4 @@
-FROM sogis/sodata:latest
+FROM sogis/sodata-base:latest
 
 COPY datasets.yml /config/datasets.yml
 
